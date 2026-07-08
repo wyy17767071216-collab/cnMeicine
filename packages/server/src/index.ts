@@ -1,12 +1,26 @@
-import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
+import { Hono } from 'hono'
+import { cors } from 'hono/cors'
+import { logger } from 'hono/logger'
+import visionRoute from './routes/vision'
 
 const app = new Hono()
 
-app.get('/', (c) => c.json({ status: 'ok', app: 'cnMeicine server' }))
+app.use('*', logger())
+app.use('*', cors({
+  origin: process.env.WEB_ORIGIN ?? 'http://localhost:5173',
+  allowHeaders: ['Authorization', 'Content-Type'],
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE']
+}))
 
-const port = Number(process.env.PORT) || 3000
+app.route('/api/vision', visionRoute)
 
-serve({ fetch: app.fetch, port }, () => {
-  console.log(`Server running on port ${port}`)
+app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
+
+const PORT = Number(process.env.PORT ?? 3000)
+
+serve({ fetch: app.fetch, port: PORT }, () => {
+  console.log(`Server running on http://localhost:${PORT}`)
 })
+
+export default app
