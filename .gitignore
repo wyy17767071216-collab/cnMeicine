@@ -5,3 +5,8 @@ dist/
 .env.*.local
 *.log
 .DS_Store
+packages/*/dist/
+*.tsbuildinfo
+coverage/
+*.local
+.pnpm-store/
