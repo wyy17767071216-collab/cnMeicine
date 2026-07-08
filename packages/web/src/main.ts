@@ -1,7 +1,17 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
+import router from './router'
+import { useAuthStore } from './stores/auth'
 
 const app = createApp(App)
-app.use(createPinia())
-app.mount('#app')
+const pinia = createPinia()
+
+app.use(pinia)
+app.use(router)
+
+// Init auth before mounting so guards have access to currentUser
+const auth = useAuthStore()
+auth.init().then(() => {
+  app.mount('#app')
+})
