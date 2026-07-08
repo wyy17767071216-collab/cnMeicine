@@ -3,7 +3,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ─── USERS ────────────────────────────────────────────────────────────────
 CREATE TABLE public.users (
-  id           UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id           UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   email        TEXT UNIQUE NOT NULL,
   role         VARCHAR(10) NOT NULL CHECK (role IN ('admin', 'viewer')),
   display_name TEXT NOT NULL,
@@ -14,6 +14,27 @@ ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "users_own_record" ON public.users
   FOR ALL USING (auth.uid() = id);
+
+-- ─── AUTO-SYNC TRIGGER ────────────────────────────────────────────────────
+-- Automatically create a public.users row when a new auth user registers
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
+BEGIN
+  INSERT INTO public.users (id, email, role, display_name)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    'viewer',
+    COALESCE(NEW.raw_user_meta_data->>'display_name', split_part(NEW.email, '@', 1))
+  )
+  ON CONFLICT (id) DO NOTHING;
+  RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- ─── MEDICATIONS ──────────────────────────────────────────────────────────
 CREATE TABLE public.medications (

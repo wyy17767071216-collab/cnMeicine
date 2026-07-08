@@ -15,7 +15,7 @@ SELECT has_column('public', 'schedules',   'time',   'schedules.time exists');
 SELECT has_column('public', 'medication_logs', 'status', 'logs.status exists');
 
 SELECT col_type_is('public', 'medication_logs', 'status',
-  'character varying', 'status is varchar');
+  'character varying(10)', 'status is varchar(10)');
 
 SELECT policies_are('public', 'medications',
   ARRAY['viewer_select', 'admin_all'],
