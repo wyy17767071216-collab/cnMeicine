@@ -3,6 +3,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import visionRoute from './routes/vision'
+import pushRoute   from './routes/push'
 
 const app = new Hono()
 
@@ -14,6 +15,7 @@ app.use('*', cors({
 }))
 
 app.route('/api/vision', visionRoute)
+app.route('/api/push',   pushRoute)
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
 
