@@ -2,7 +2,9 @@ import { Hono } from 'hono'
 import { createClient } from '@supabase/supabase-js'
 import { authMiddleware } from '../middleware/auth'
 
-const push = new Hono()
+type Variables = { userId: string }
+
+const push = new Hono<{ Variables: Variables }>()
 const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
 // Public endpoint — no auth
@@ -14,7 +16,7 @@ push.get('/vapid-public-key', (c) => {
 push.use('/subscribe', authMiddleware)
 
 push.post('/subscribe', async (c) => {
-  const userId = c.get('userId') as string
+  const userId = c.get('userId')
   const { endpoint, p256dh, auth } = await c.req.json<{
     endpoint: string; p256dh: string; auth: string
   }>()
@@ -28,7 +30,7 @@ push.post('/subscribe', async (c) => {
 })
 
 push.delete('/subscribe', async (c) => {
-  const userId = c.get('userId') as string
+  const userId = c.get('userId')
   const { endpoint } = await c.req.json<{ endpoint: string }>()
 
   await supabase
