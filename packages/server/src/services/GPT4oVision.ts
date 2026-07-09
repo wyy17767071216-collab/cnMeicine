@@ -1,6 +1,9 @@
 import OpenAI from 'openai'
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const client = new OpenAI({
+  apiKey:  process.env.DASHSCOPE_API_KEY ?? '',
+  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+})
 
 export interface VisionResult {
   name: string
@@ -22,7 +25,7 @@ const SYSTEM_PROMPT = `你是一个专业的药品识别助手。
 
 export async function identifyDrug(imageBase64: string, mimeType: string): Promise<VisionResult> {
   const completion = await client.chat.completions.create({
-    model: 'gpt-4o',
+    model: 'qwen-vl-plus',
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
       {
@@ -36,8 +39,7 @@ export async function identifyDrug(imageBase64: string, mimeType: string): Promi
         ]
       }
     ],
-    max_tokens: 256,
-    response_format: { type: 'json_object' }
+    max_tokens: 256
   })
 
   const raw = completion.choices[0].message.content ?? '{}'
