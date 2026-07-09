@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: cnmedicine-server
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    region: singapore
+    plan: free
+    envVars:
+      - key: SUPABASE_URL
+        value: https://mcnjrxyfvsdbckrsswfs.supabase.co
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: DASHSCOPE_API_KEY
+        sync: false
+      - key: VAPID_PUBLIC_KEY
+        value: BDgaMhZ4BNKG6HusBUvuHfmeigQzWg6kHJFh5vFTbYuJ4xBbn1-oet6gstsI3FJX-2Zxrmfu49e2ciTwrQeUcGI
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_EMAIL
+        value: admin@chinian.xyz
+      - key: WEB_ORIGIN
+        value: https://chinian.xyz
+      - key: PORT
+        value: "8080"
