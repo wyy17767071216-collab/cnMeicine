@@ -1,0 +1,101 @@
+<h2 style="text-align:center;margin-bottom:8px;font-size:22px">主要页面布局 · 点击选择你喜欢的方案</h2>
+<p style="text-align:center;color:#888;margin-bottom:32px;font-size:16px">模拟手机屏幕 · 暖色系风格 · 老人家字体大小</p>
+
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:860px;margin:0 auto">
+
+  <!-- Option A: 卡片式列表 -->
+  <div data-choice="a" data-text="A. 卡片式列表 - 每颗药一张卡片" style="border:2px solid #e2e8f0;border-radius:16px;padding:20px;cursor:pointer;background:#fff">
+    <div style="background:linear-gradient(135deg,#f97316,#ec4899);border-radius:12px;padding:16px;margin-bottom:16px;color:white">
+      <div style="font-size:13px;opacity:0.9">2025年7月9日 星期三</div>
+      <div style="font-size:22px;font-weight:700;margin-top:4px">今日用药</div>
+      <div style="font-size:14px;margin-top:4px;opacity:0.9">还有 2 颗未服用</div>
+    </div>
+
+    <!-- 药品卡片 -->
+    <div style="background:#fff7ed;border-radius:12px;padding:14px;margin-bottom:10px;border-left:4px solid #f97316">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:#1e293b">阿莫西林胶囊</div>
+          <div style="font-size:15px;color:#64748b;margin-top:3px">早餐后 · 0.5g × 2粒</div>
+        </div>
+        <div style="background:#22c55e;color:white;border-radius:8px;padding:6px 12px;font-size:14px;font-weight:600">✓ 已服</div>
+      </div>
+    </div>
+
+    <div style="background:#fff7ed;border-radius:12px;padding:14px;margin-bottom:10px;border-left:4px solid #f97316">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:#1e293b">维生素C片</div>
+          <div style="font-size:15px;color:#64748b;margin-top:3px">午餐后 · 100mg × 1片</div>
+        </div>
+        <div style="background:#f97316;color:white;border-radius:8px;padding:6px 12px;font-size:14px;font-weight:600">待服用</div>
+      </div>
+    </div>
+
+    <div style="background:#fff7ed;border-radius:12px;padding:14px;border-left:4px solid #f97316">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:#1e293b">降压药</div>
+          <div style="font-size:15px;color:#64748b;margin-top:3px">晚餐后 · 5mg × 1片</div>
+        </div>
+        <div style="background:#e2e8f0;color:#94a3b8;border-radius:8px;padding:6px 12px;font-size:14px">未到时间</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;text-align:center">
+      <span style="font-size:15px;font-weight:700;color:#f97316">A. 卡片式列表</span>
+      <p style="font-size:12px;color:#94a3b8;margin:4px 0 0">每颗药独立卡片 · 状态清晰</p>
+    </div>
+  </div>
+
+  <!-- Option B: 时间轴分组 -->
+  <div data-choice="b" data-text="B. 时间轴分组 - 按早中晚分组" style="border:2px solid #e2e8f0;border-radius:16px;padding:20px;cursor:pointer;background:#fff">
+    <div style="background:linear-gradient(135deg,#f97316,#ec4899);border-radius:12px;padding:16px;margin-bottom:16px;color:white">
+      <div style="font-size:13px;opacity:0.9">2025年7月9日 星期三</div>
+      <div style="font-size:22px;font-weight:700;margin-top:4px">今日用药</div>
+      <div style="font-size:14px;margin-top:4px;opacity:0.9">还有 2 颗未服用</div>
+    </div>
+
+    <!-- 早餐组 -->
+    <div style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <div style="background:#22c55e;color:white;border-radius:6px;padding:3px 10px;font-size:14px;font-weight:600">☀️ 早餐后</div>
+        <div style="font-size:13px;color:#22c55e;font-weight:600">全部已服 ✓</div>
+      </div>
+      <div style="background:#f0fdf4;border-radius:10px;padding:12px;border:1px solid #bbf7d0">
+        <div style="font-size:17px;font-weight:700;color:#1e293b">阿莫西林胶囊</div>
+        <div style="font-size:14px;color:#64748b;margin-top:2px">0.5g × 2粒 · 08:00</div>
+      </div>
+    </div>
+
+    <!-- 午餐组 -->
+    <div style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <div style="background:#f97316;color:white;border-radius:6px;padding:3px 10px;font-size:14px;font-weight:600">🌤️ 午餐后</div>
+        <div style="font-size:13px;color:#f97316;font-weight:600">待服用</div>
+      </div>
+      <div style="background:#fff7ed;border-radius:10px;padding:12px;border:1px solid #fed7aa">
+        <div style="font-size:17px;font-weight:700;color:#1e293b">维生素C片</div>
+        <div style="font-size:14px;color:#64748b;margin-top:2px">100mg × 1片 · 12:00</div>
+      </div>
+    </div>
+
+    <!-- 晚餐组 -->
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <div style="background:#94a3b8;color:white;border-radius:6px;padding:3px 10px;font-size:14px;font-weight:600">🌙 晚餐后</div>
+        <div style="font-size:13px;color:#94a3b8">未到时间</div>
+      </div>
+      <div style="background:#f8fafc;border-radius:10px;padding:12px;border:1px solid #e2e8f0">
+        <div style="font-size:17px;font-weight:700;color:#94a3b8">降压药</div>
+        <div style="font-size:14px;color:#94a3b8;margin-top:2px">5mg × 1片 · 18:00</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;text-align:center">
+      <span style="font-size:15px;font-weight:700;color:#f97316">B. 时间轴分组</span>
+      <p style="font-size:12px;color:#94a3b8;margin:4px 0 0">按早中晚分组 · 一目了然</p>
+    </div>
+  </div>
+
+</div>

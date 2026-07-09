@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(agent-browser)",
+      "Bash(bash *)",
+      "Skill(claude-api)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(pnpm --version)",
+      "Bash(npx pnpm *)",
+      "Bash(node -e \"require\\('child_process'\\).execSync\\('pnpm --version', {stdio:'inherit'}\\)\")",
+      "Read(//c/Users/A/AppData/Roaming/npm/**)",
+      "Read(//c/Users/A/AppData/Local/**)",
+      "Bash(cmd.exe *)",
+      "Bash(node *)",
+      "Bash(\"/c/Users/A/AppData/Roaming/npm/pnpm\" --version)",
+      "Bash(/c/Users/A/AppData/Roaming/npm/pnpm install *)",
+      "Bash(npx *)",
+      "Bash(git *)",
+      "Bash(pnpm -r build)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(python3 *)",
+      "Bash(npm test *)"
+    ]
+  }
+}
