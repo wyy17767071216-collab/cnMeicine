@@ -5,6 +5,7 @@ export interface User {
   email: string
   role: UserRole
   display_name: string
+  avatar_url?: string | null
   created_at: string
 }
 
