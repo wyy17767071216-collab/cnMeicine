@@ -1,5 +1,5 @@
--- Enable UUID extension
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- UUID extension (kept for compatibility; gen_random_uuid() used instead)
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- ─── USERS ────────────────────────────────────────────────────────────────
 CREATE TABLE public.users (
@@ -38,7 +38,7 @@ CREATE TRIGGER on_auth_user_created
 
 -- ─── MEDICATIONS ──────────────────────────────────────────────────────────
 CREATE TABLE public.medications (
-  id               UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id          UUID NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
   name             TEXT NOT NULL,
   dosage           NUMERIC(10,2) NOT NULL,
@@ -71,7 +71,7 @@ CREATE POLICY "admin_all" ON public.medications
 
 -- ─── SCHEDULES ────────────────────────────────────────────────────────────
 CREATE TABLE public.schedules (
-  id            UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   medication_id UUID NOT NULL REFERENCES public.medications(id) ON DELETE CASCADE,
   time          VARCHAR(5) NOT NULL,   -- HH:MM
   days_of_week  INTEGER[] NOT NULL,    -- 0..6
@@ -101,7 +101,7 @@ CREATE POLICY "admin_all" ON public.schedules
 
 -- ─── MEDICATION LOGS ──────────────────────────────────────────────────────
 CREATE TABLE public.medication_logs (
-  id            UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   schedule_id   UUID NOT NULL REFERENCES public.schedules(id) ON DELETE CASCADE,
   medication_id UUID NOT NULL REFERENCES public.medications(id) ON DELETE CASCADE,
   scheduled_at  TIMESTAMPTZ NOT NULL,
@@ -138,7 +138,7 @@ CREATE POLICY "admin_all" ON public.medication_logs
 
 -- ─── PUSH SUBSCRIPTIONS ───────────────────────────────────────────────────
 CREATE TABLE public.push_subscriptions (
-  id         UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id    UUID NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
   endpoint   TEXT NOT NULL UNIQUE,
   p256dh     TEXT NOT NULL,
