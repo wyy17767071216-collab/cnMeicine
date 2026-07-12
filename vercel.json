@@ -2,8 +2,9 @@
   "buildCommand": "pnpm --filter @cn-medicine/web run build",
   "outputDirectory": "packages/web/dist",
   "installCommand": "npm install -g pnpm@9 && pnpm install --frozen-lockfile",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ],
   "headers": [
     {
